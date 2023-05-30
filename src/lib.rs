@@ -1,18 +1,16 @@
 //! This crate allows easy access to instances of the traveling salesman problem taken from tsplib.
 
-use mahf::{
-    framework::{SingleObjective},
-    problems::{
-        Problem, VectorProblem,
-    },
-    state::{common::EvaluatorInstance},
-};
 use anyhow::{anyhow, Result};
 use include_dir::{include_dir, Dir};
+use mahf::{
+    framework::SingleObjective,
+    problems::{Problem, VectorProblem},
+    state::common::EvaluatorInstance,
+};
 use tspf::WeightKind;
 
-mod opt;
 mod instances;
+mod opt;
 
 pub use instances::Instances;
 

@@ -1,5 +1,5 @@
 use crate::Tsp;
-use anyhow::Result;
+use anyhow::{Context, Result};
 
 /// This enum represents built in instances of the symmetric travelling salesman problem.
 #[derive(Debug, strum::EnumString, strum::AsRefStr, strum::Display, strum::EnumIter)]
@@ -140,6 +140,8 @@ impl Instances {
 
     /// Loads the built-in instance.
     pub fn load(&self) -> Tsp {
-        self.try_load().expect("Error while constructing instance")
+        self.try_load()
+            .with_context(|| format!("Loading {}", self))
+            .expect("Error while constructing instance")
     }
 }
