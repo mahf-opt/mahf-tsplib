@@ -3,9 +3,8 @@
 use anyhow::{anyhow, Result};
 use include_dir::{include_dir, Dir};
 use mahf::{
-    framework::SingleObjective,
-    problems::{Problem, VectorProblem},
-    state::common::EvaluatorInstance,
+    problems::{ObjectiveFunction, Problem, VectorProblem},
+    SingleObjective,
 };
 use tspf::WeightKind;
 
@@ -127,18 +126,16 @@ impl Problem for Tsp {
     fn name(&self) -> &str {
         "Tsp"
     }
+}
 
-    fn default_evaluator<'a>(&self) -> EvaluatorInstance<'a, Self> {
-        EvaluatorInstance::functional(|problem, _state, individuals| {
-            for individual in individuals {
-                individual.evaluate(problem.evaluate_solution(individual.solution()));
-            }
-        })
+impl ObjectiveFunction for Tsp {
+    fn objective(&self, solution: &Self::Encoding) -> Self::Objective {
+        self.evaluate_solution(solution)
     }
 }
 
 impl VectorProblem for Tsp {
-    type T = usize;
+    type Element = usize;
 
     fn dimension(&self) -> usize {
         self.inner.dim()

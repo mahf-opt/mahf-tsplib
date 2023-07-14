@@ -1,7 +1,6 @@
-use mahf::framework::SingleObjective;
+use mahf::SingleObjective;
 
-use crate::{Tsp, TspOptimum, Route};
-
+use crate::{Route, Tsp, TspOptimum};
 
 pub fn parse_opt_file(instance: &Tsp, opt_contents: &str) -> TspOptimum {
     let best_solution = opt_contents

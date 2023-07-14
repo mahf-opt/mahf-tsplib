@@ -5,8 +5,7 @@ authors = ["Leopold Luley <git@leopoldluley.de>"]
 edition = "2021"
 
 [dependencies]
-mahf = { git = "https://github.com/mahf-opt/mahf" }
-
+mahf = "0.1.0"
 tspf = "0.3.1"
 include_dir = "0.7.3"
 anyhow = "1.0.51"
